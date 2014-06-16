@@ -22,9 +22,9 @@ typedef enum PlayerIds {
 	PLAYER_2 = 2
 } PlayerIds;
 
-const char playerSymbols[] = {
-	"X",
-	"O"
-};
+/*const char playerSymbols[] = {
+	'X',
+	'O'
+};*/
 
 #endif /* __CONSTANTS_H */
