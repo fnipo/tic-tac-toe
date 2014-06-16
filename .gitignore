@@ -1,3 +1,7 @@
+# Folders
+Debug/*
+Release/*
+
 # Object files
 *.o
 *.ko
