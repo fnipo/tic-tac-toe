@@ -39,49 +39,18 @@ void BOARD3D_Init() {
 bool_t BOARD3D_GameBoardIsEmpty(void) {
 	return gameBoardIsEmpty;
 }
-void BOARD3D_PrintBoard(void) {
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf(".___.___.___.");
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
 
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf("| %c | %c | %c |", GetPositionChar(i,0,0), GetPositionChar(i,0,1), GetPositionChar(i,0,2));
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
+char BOARD3D_GetPositionChar(int dimension, int line, int col) {
+	switch(gameBoard[dimension][line][col]) {
+		case PLAYER_1:
+			return playerSymbols[PLAYER_1];
+		case PLAYER_2:
+			return playerSymbols[PLAYER_2];
+		default:
+			return playerSymbols[NONE];
 	}
-	printf(NEW_LINE_CHAR);
-
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf(".___.___.___.");
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
-
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf("| %c | %c | %c |", GetPositionChar(i,1,0), GetPositionChar(i,1,1), GetPositionChar(i,1,2));
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
-
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf(".___.___.___.");
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
-
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf("| %c | %c | %c |", GetPositionChar(i,2,0), GetPositionChar(i,2,1), GetPositionChar(i,2,2));
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
-
-	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		printf(".___.___.___.");
-		printf(BOARD3D_UI_BOARDS_SEPARATOR);
-	}
-	printf(NEW_LINE_CHAR);
 }
+
 void BOARD3D_MakeAMove(PlayerIds playerId, int dimension, int line, int col) {
 	if(gameBoard[dimension][line][col] == GAME_BOARD_ELEMENT_EMPTY_VALUE) {
 		gameBoard[dimension][line][col] = playerId;
@@ -156,16 +125,6 @@ PlayerIds BOARD3D_CheckWinner() {
 }
 
 /* Private functions */
-static char GetPositionChar(int dimension, int line, int col) {
-	switch(gameBoard[dimension][line][col]) {
-		case PLAYER_1:
-			return playerSymbols[PLAYER_1];
-		case PLAYER_2:
-			return playerSymbols[PLAYER_2];
-		default:
-			return playerSymbols[NONE];
-	}
-}
 static void PutPlayerScore(int* playersScore, int resultSum) {
 	if(resultSum == playerSumsForScoring[PLAYER_1]) {
 		playersScore[PLAYER_1]++;

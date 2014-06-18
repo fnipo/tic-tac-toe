@@ -30,7 +30,7 @@ extern const int playerSumsForScoring[];
 /* Public functions */
 void BOARD3D_Init();
 bool_t BOARD3D_GameBoardIsEmpty(void);
-void BOARD3D_PrintBoard(void);
+static char BOARD3D_GetPositionChar(int dimension, int line, int col);
 void BOARD3D_MakeAMove(PlayerIds playerId, int dimension, int line, int col);
 bool_t BOARD3D_CheckEndGame();
 PlayerIds BOARD3D_CheckWinner();
