@@ -21,6 +21,12 @@
 #endif
 
 #define GAME_BOARD_ELEMENT_EMPTY_VALUE		0
+#define PLAYER_NAME_SIZE					256
+#define MAINMENU_MIN_OPTION					1
+#define MAINMENU_MAX_OPTION					3
+#define GAMEMENU_MIN_OPTION					0
+#define GAMEMENU_MAX_OPTION					2
+#define BACK_OPTION							0
 
 typedef int bool_t;
 typedef enum { FALSE, TRUE };
@@ -30,6 +36,28 @@ typedef enum PlayerIds {
 	PLAYER_1 = 1,
 	PLAYER_2 = 2
 } PlayerIds;
+
+typedef enum GameMode {
+	BOARD_3D,
+	BOARD_4D
+} GameMode;
+
+typedef enum MainMenuOption {
+	MAINMENU_PLAY = 1,
+	MAINMENU_RANKING = 2,
+	MAINMENU_QUIT = 3
+} MainMenuOption;
+
+typedef enum GameModeMenuOption {
+	GAMEMENU_BOARD3D = 1,
+	GAMEMENU_BOARD4D = 2
+} GameModeMenuOption;
+
+typedef struct PlayerInfo {
+	char name[PLAYER_NAME_SIZE];
+	GameMode mode;
+	int score;
+} PlayerInfo;
 
 extern const char playerSymbols[];
 

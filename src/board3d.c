@@ -15,7 +15,8 @@ const int playerSumsForScoring[] = {
 	3,
 	6
 };
-int gameBoard[BOARD3D_DIMENSIONS_SIZE][BOARD3D_LINE_SIZE][BOARD3D_COL_SIZE];
+static int gameBoard[BOARD3D_DIMENSIONS_SIZE][BOARD3D_LINE_SIZE][BOARD3D_COL_SIZE];
+static bool_t gameBoardIsEmpty = TRUE;
 
 /* Forward declarations */
 static char GetPositionChar(int dimension, int line, int col);
@@ -33,6 +34,10 @@ static int Sum3dInternalDiagonals(int line, int col);
 /* Public functions */
 void BOARD3D_Init() {
 	memset(gameBoard, GAME_BOARD_ELEMENT_EMPTY_VALUE, sizeof(gameBoard));
+	gameBoardIsEmpty = TRUE;
+}
+bool_t BOARD3D_GameBoardIsEmpty(void) {
+	return gameBoardIsEmpty;
 }
 void BOARD3D_PrintBoard(void) {
 	for (int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
@@ -80,6 +85,10 @@ void BOARD3D_PrintBoard(void) {
 void BOARD3D_MakeAMove(PlayerIds playerId, int dimension, int line, int col) {
 	if(gameBoard[dimension][line][col] == GAME_BOARD_ELEMENT_EMPTY_VALUE) {
 		gameBoard[dimension][line][col] = playerId;
+	}
+
+	if(gameBoardIsEmpty) {
+		gameBoardIsEmpty = FALSE;
 	}
 }
 bool_t BOARD3D_CheckEndGame() {
