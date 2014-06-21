@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1403349605 source:c:\users\fnf\workspace\tictactoe\src\board3d.c
+	<string.h>
+	<stdio.h>
+	<board3d.h>
+
+1403349605 c:\users\fnf\workspace\tictactoe\inc\board3d.h
+	<constants.h>
+
+1403349605 c:\users\fnf\workspace\tictactoe\inc\constants.h
+
+1403349605 source:c:\users\fnf\workspace\tictactoe\src\constants.c
+	<constants.h>
+
+1403349605 source:c:\users\fnf\workspace\tictactoe\src\main.c
+	<stdlib.h>
+	<ui_general.h>
+
+1403349605 c:\users\fnf\workspace\tictactoe\inc\ui_general.h
+
