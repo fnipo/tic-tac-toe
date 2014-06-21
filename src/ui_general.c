@@ -145,12 +145,28 @@ static void PrintRanking() {
 	PrintHeader();
 
     int counter = SCORE_Get(playerInfoArray);
-    printf("Tamanho Score: %d", counter);
     printf(NEW_LINE_CHAR);
 
+    printf("%s\t%s\t%s%s", STRING_UI_RANKING_TITLE_1, STRING_UI_RANKING_TITLE_2, STRING_UI_RANKING_TITLE_3, NEW_LINE_CHAR);
     for(int i = 0; i < (counter-1); i++) {
-        printf("%s\t%s\t%d%s", playerInfoArray[i].name, "3x3x3"/*playerInfoArray[i].name*/, playerInfoArray[i].score, NEW_LINE_CHAR);
-        playerInfoArray[i];
+        /* NAME */
+        printf("%s", playerInfoArray[i].name);
+
+        /* GAME MODE */
+        printf("%s", UI_RANKING_SEPARATOR);
+        switch(playerInfoArray[i].mode) {
+            case BOARD_3D:
+                printf("%s", STRING_GAMEMODE_BOARD3D_NAME);
+                break;
+            case BOARD_4D:
+                printf("%s", STRING_GAMEMODE_BOARD4D_NAME);
+                break;
+        }
+
+        /* SCORE */
+        printf("%s", UI_RANKING_SEPARATOR);
+        printf("%d", playerInfoArray[i].score);
+        printf("%s", NEW_LINE_CHAR);
     }
 
 	printf(NEW_LINE_CHAR);

@@ -38,10 +38,10 @@ void UIBOARD3D_Start() {
 
     PlayerInfo* actualPlayer = &player1;
 
-	/*while(!BOARD3D_CheckEndGame()) {
+	while(!BOARD3D_CheckEndGame()) {
         UTIL_ClearConsole();
-		//PrintBoard();
-		PrintBoardDebugMode();
+		PrintBoard();
+		//PrintBoardDebugMode();
 		puts(NEW_LINE_CHAR);
 		RequestPlayerMove(actualPlayer);
 
@@ -50,16 +50,12 @@ void UIBOARD3D_Start() {
 		} else {
 		    actualPlayer = &player1;
 		}
-	}*/
+	}
 
     /* DEBUG */
-    MakeFakeDebugMoves();
-    PrintBoardDebugMode();
+    //MakeFakeDebugMoves();
+    //PrintBoardDebugMode();
 
-	/*
-	 * TODO: 	Get and Set Score in PlayerInfo
-	 * 			Save in Ranking
-	 */
     printf(NEW_LINE_CHAR);
 	switch(BOARD3D_CheckWinner()) {
 		case PLAYER_1:
@@ -78,7 +74,6 @@ void UIBOARD3D_Start() {
 
     printf(NEW_LINE_CHAR);
     puts("Press ENTER to exit");
-    getchar();
     getchar();
     getchar();
 }

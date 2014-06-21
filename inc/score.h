@@ -14,8 +14,10 @@
 
 #include <constants.h>
 
-#define SCORE_MAX_PLAYERS   256
-#define SCORE_FILE_NAME     "score.txt"
+#define SCORE_MAX_PLAYERS               256
+#define SCORE_FILE_NAME                 "score.csv"
+#define SCORE_FILE_LINE_MAX_LENGTH      (256 + 7 + 5) /* (NAME MAX LENGTH + GAME MODE NAME MAX LENGTH + SCORE MAX DIGITS) */
+#define SCORE_DATA_STR_SEPARATOR        ","
 
 /* Public functions */
 void SCORE_Save(PlayerInfo* pPlayerInfo);

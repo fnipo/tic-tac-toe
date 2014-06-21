@@ -13,6 +13,7 @@
 #define __UI_GENERAL_H
 
 #define UI_FAKEBOARD_SEPARATOR		"     "
+#define UI_RANKING_SEPARATOR		"\t"
 
 /* Public functions */
 void UIGENERAL_Start();

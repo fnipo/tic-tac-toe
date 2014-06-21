@@ -31,5 +31,8 @@
 #define STRING_ERROR_SAVE_SCORE				"Error when saving score!"
 #define STRING_GAMEMODE_BOARD3D_NAME		"3x3x3"
 #define STRING_GAMEMODE_BOARD4D_NAME		"4x4x4x4"
+#define STRING_UI_RANKING_TITLE_1	    	"Name"
+#define STRING_UI_RANKING_TITLE_2	    	"Mode"
+#define STRING_UI_RANKING_TITLE_3	    	"Score"
 
 #endif /* __STRINGS_H */

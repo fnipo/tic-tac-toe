@@ -1,20 +1,59 @@
 # depslib dependency file v1.0
-1403349605 source:c:\users\fnf\workspace\tictactoe\src\board3d.c
+1403209522 source:c:\users\fnf\workspace\tictactoe\src\board3d.c
 	<string.h>
 	<stdio.h>
 	<board3d.h>
 
-1403349605 c:\users\fnf\workspace\tictactoe\inc\board3d.h
+1403209159 c:\users\fnf\workspace\tictactoe\inc\board3d.h
 	<constants.h>
 
-1403349605 c:\users\fnf\workspace\tictactoe\inc\constants.h
+1403126775 c:\users\fnf\workspace\tictactoe\inc\constants.h
 
-1403349605 source:c:\users\fnf\workspace\tictactoe\src\constants.c
+1402946981 source:c:\users\fnf\workspace\tictactoe\src\constants.c
 	<constants.h>
 
-1403349605 source:c:\users\fnf\workspace\tictactoe\src\main.c
+1403112545 source:c:\users\fnf\workspace\tictactoe\src\main.c
 	<stdlib.h>
 	<ui_general.h>
 
-1403349605 c:\users\fnf\workspace\tictactoe\inc\ui_general.h
+1403383879 c:\users\fnf\workspace\tictactoe\inc\ui_general.h
+
+1403385787 source:c:\users\fnf\workspace\tictactoe\src\score.c
+	<score.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<strings.h>
+
+1403382769 c:\users\fnf\workspace\tictactoe\inc\score.h
+	<constants.h>
+
+1403383182 c:\users\fnf\workspace\tictactoe\inc\strings.h
+
+1403299025 source:c:\users\fnf\workspace\tictactoe\src\ui_board3d.c
+	<ui_board3d.h>
+	<constants.h>
+	<board3d.h>
+	<strings.h>
+	<ui_general.h>
+
+1403126736 c:\users\fnf\workspace\tictactoe\inc\ui_board3d.h
+
+1403383896 source:c:\users\fnf\workspace\tictactoe\src\ui_general.c
+	<ui_general.h>
+	<stdio.h>
+	<stdlib.h>
+	<constants.h>
+	<strings.h>
+	<util.h>
+	<ui_board3d.h>
+	<score.h>
+
+1402946981 c:\users\fnf\workspace\tictactoe\inc\util.h
+
+1403113098 source:c:\users\fnf\workspace\tictactoe\src\util.c
+	<util.h>
+	<constants.h>
+	<stdio.h>
+	<stdlib.h>
 
