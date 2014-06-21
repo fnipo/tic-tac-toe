@@ -16,5 +16,7 @@
 
 /* Public functions */
 void UIGENERAL_Start();
+int UIGENERAL_GetUserOption(int minOption, int maxOption);
+
 
 #endif /* __UI_GENERAL_H */

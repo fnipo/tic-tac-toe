@@ -16,8 +16,8 @@
 #include <strings.h>
 #include <util.h>
 #include <ui_board3d.h>
+#include <score.h>
 
-static int GetUserOption(int minOption, int maxOption);
 static void PrintHeader();
 static void PrintFakeBoard();
 static void PrintMainMenu();
@@ -27,6 +27,8 @@ static void HandleMainMenu();
 static void HandleGameModeSubMenu();
 static void HandleRanking();
 
+static PlayerInfo playerInfoArray[SCORE_MAX_PLAYERS];
+
 void UIGENERAL_Start() {
 	while(TRUE) {
 		PrintMainMenu();
@@ -34,7 +36,7 @@ void UIGENERAL_Start() {
 	}
 }
 
-static int GetUserOption(int minOption, int maxOption) {
+int UIGENERAL_GetUserOption(int minOption, int maxOption) {
 	int option;
 
 	while(TRUE) {
@@ -142,19 +144,21 @@ static void PrintGameModeSubMenu() {
 static void PrintRanking() {
 	PrintHeader();
 
-	puts("1 - Náutico");
-	puts("2 - Real Madrid");
-	puts("3 - Barcelona");
-	puts("4 - Santa Cruz");
-	puts("5 - Ibis");
-	puts("6 - Sport");
+    int counter = SCORE_Get(playerInfoArray);
+    printf("Tamanho Score: %d", counter);
+    printf(NEW_LINE_CHAR);
+
+    for(int i = 0; i < (counter-1); i++) {
+        printf("%s\t%s\t%d%s", playerInfoArray[i].name, "3x3x3"/*playerInfoArray[i].name*/, playerInfoArray[i].score, NEW_LINE_CHAR);
+        playerInfoArray[i];
+    }
 
 	printf(NEW_LINE_CHAR);
 	puts(STRING_BACK_OPTION);
 }
 
 static void HandleMainMenu() {
-	int option = GetUserOption(MAINMENU_MIN_OPTION, MAINMENU_MAX_OPTION);
+	int option = UIGENERAL_GetUserOption(MAINMENU_MIN_OPTION, MAINMENU_MAX_OPTION);
 
 	if(option == MAINMENU_PLAY) {
 		PrintGameModeSubMenu();
@@ -168,7 +172,7 @@ static void HandleMainMenu() {
 }
 
 static void HandleGameModeSubMenu() {
-	int option = GetUserOption(GAMEMENU_MIN_OPTION, GAMEMENU_MAX_OPTION);
+	int option = UIGENERAL_GetUserOption(GAMEMENU_MIN_OPTION, GAMEMENU_MAX_OPTION);
 
 	if(option == GAMEMENU_BOARD3D) {
 		UIBOARD3D_Start();
@@ -178,5 +182,5 @@ static void HandleGameModeSubMenu() {
 }
 
 static void HandleRanking() {
-	GetUserOption(BACK_OPTION, BACK_OPTION);
+	UIGENERAL_GetUserOption(BACK_OPTION, BACK_OPTION);
 }

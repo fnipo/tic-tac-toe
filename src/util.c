@@ -15,7 +15,6 @@
 #include <stdlib.h>
 
 void UTIL_ClearConsole() {
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-	//system(CLEAR_COMMAND);
+	//printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	system(CLEAR_COMMAND);
 }

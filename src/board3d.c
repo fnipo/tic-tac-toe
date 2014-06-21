@@ -12,15 +12,16 @@
 #include <board3d.h>
 
 const int playerSumsForScoring[] = {
-	3,
-	6
+    -1,  //NONE
+	3,  //PLAYER1
+	6   //PLAYER2
 };
 static int gameBoard[BOARD3D_DIMENSIONS_SIZE][BOARD3D_LINE_SIZE][BOARD3D_COL_SIZE];
 static bool_t gameBoardIsEmpty = TRUE;
+int playersScore[BOARD3D_NUMBER_OF_PLAYERS];
 
 /* Forward declarations */
-static char GetPositionChar(int dimension, int line, int col);
-static void PutPlayerScore(int* playersScore, int resultSum);
+static void PutPlayerScore(int* playersScore, int resultSum, int scoreMultiplier);
 static PlayerIds DefineWinningPlayer(int* playersScore);
 static int Sum2dLines(int dimension, int line);
 static int Sum2dCols(int dimension, int col);
@@ -34,12 +35,12 @@ static int Sum3dInternalDiagonals(int line, int col);
 /* Public functions */
 void BOARD3D_Init() {
 	memset(gameBoard, GAME_BOARD_ELEMENT_EMPTY_VALUE, sizeof(gameBoard));
+	memset(playersScore, 0, sizeof(playersScore));
 	gameBoardIsEmpty = TRUE;
 }
 bool_t BOARD3D_GameBoardIsEmpty(void) {
 	return gameBoardIsEmpty;
 }
-
 char BOARD3D_GetPositionChar(int dimension, int line, int col) {
 	switch(gameBoard[dimension][line][col]) {
 		case PLAYER_1:
@@ -50,7 +51,9 @@ char BOARD3D_GetPositionChar(int dimension, int line, int col) {
 			return playerSymbols[NONE];
 	}
 }
-
+int BOARD3D_GetPositionValue(int dimension, int line, int col) {
+	return gameBoard[dimension][line][col];
+}
 void BOARD3D_MakeAMove(PlayerIds playerId, int dimension, int line, int col) {
 	if(gameBoard[dimension][line][col] == GAME_BOARD_ELEMENT_EMPTY_VALUE) {
 		gameBoard[dimension][line][col] = playerId;
@@ -74,62 +77,63 @@ bool_t BOARD3D_CheckEndGame() {
 	return TRUE;
 }
 PlayerIds BOARD3D_CheckWinner() {
-	int playersScore[BOARD3D_NUMBER_OF_PLAYERS];
-
 	/* Check 2D lines(9 situations) */
 	for(int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
 		for(int j = 0; j < BOARD3D_LINE_SIZE; j++) {
-			PutPlayerScore(playersScore, Sum2dLines(i, j));
+			PutPlayerScore(playersScore, Sum2dLines(i, j), BOARD3D_2D_SCORE_MULTIPLIER);
 		}
 	}
 
 	/* Check 2D columns(9 situations) */
 	for(int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
 		for(int k = 0; k < BOARD3D_COL_SIZE; k++) {
-			PutPlayerScore(playersScore, Sum2dCols(i, k));
+			PutPlayerScore(playersScore, Sum2dCols(i, k), BOARD3D_2D_SCORE_MULTIPLIER);
 		}
 	}
 
 	/* Check 2D diagonals(6 situations) */
 	for(int i = 0; i < BOARD3D_DIMENSIONS_SIZE; i++) {
-		PutPlayerScore(playersScore, Sum2dDiagonals(i));
-		PutPlayerScore(playersScore, Sum2dInvertedDiagonals(i));
+		PutPlayerScore(playersScore, Sum2dDiagonals(i), BOARD3D_2D_SCORE_MULTIPLIER);
+		PutPlayerScore(playersScore, Sum2dInvertedDiagonals(i), BOARD3D_2D_SCORE_MULTIPLIER);
 	}
 
 	/* Check 3D vertical lines(9 situations) */
 	for(int j = 0; j < BOARD3D_LINE_SIZE; j++) {
 		for(int k = 0; k < BOARD3D_COL_SIZE; k++) {
-			PutPlayerScore(playersScore, Sum3dVerticalLines(j, k));
+			PutPlayerScore(playersScore, Sum3dVerticalLines(j, k), BOARD3D_3D_NON_DIAGONAL_SCORE_MULTIPLIER);
 		}
 	}
 
 	/* Check 3D external diagonals(4 situations) */
-	PutPlayerScore(playersScore, Sum3dExternalDiagonals(0, 0));
-	PutPlayerScore(playersScore, Sum3dExternalDiagonals(0, BOARD3D_COL_MAX_INDEX));
-	PutPlayerScore(playersScore, Sum3dExternalDiagonals(BOARD3D_LINE_MAX_INDEX, 0));
-	PutPlayerScore(playersScore, Sum3dExternalDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX));
+	PutPlayerScore(playersScore, Sum3dExternalDiagonals(0, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalDiagonals(0, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalDiagonals(BOARD3D_LINE_MAX_INDEX, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
 
 	/* Check 3D external inverted diagonals(4 situations) */
-	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(0, 0));
-	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(0, BOARD3D_COL_MAX_INDEX));
-	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(BOARD3D_LINE_MAX_INDEX, 0));
-	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX));
+	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(0, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(0, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(BOARD3D_LINE_MAX_INDEX, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dExternalInvertedDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
 
 	/* Check 3D internal diagonals(4 situations) */
-	PutPlayerScore(playersScore, Sum3dInternalDiagonals(0, 0));
-	PutPlayerScore(playersScore, Sum3dInternalDiagonals(0, BOARD3D_COL_MAX_INDEX));
-	PutPlayerScore(playersScore, Sum3dInternalDiagonals(BOARD3D_LINE_MAX_INDEX, 0));
-	PutPlayerScore(playersScore, Sum3dInternalDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX));
+	PutPlayerScore(playersScore, Sum3dInternalDiagonals(0, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dInternalDiagonals(0, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dInternalDiagonals(BOARD3D_LINE_MAX_INDEX, 0), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
+	PutPlayerScore(playersScore, Sum3dInternalDiagonals(BOARD3D_LINE_MAX_INDEX, BOARD3D_COL_MAX_INDEX), BOARD3D_3D_DIAGONAL_SCORE_MULTIPLIER);
 
 	return DefineWinningPlayer(playersScore);
 }
+int BOARD3D_GetScore(PlayerIds playerId) {
+    return playersScore[playerId];
+}
 
 /* Private functions */
-static void PutPlayerScore(int* playersScore, int resultSum) {
+static void PutPlayerScore(int* playersScore, int resultSum, int scoreMultiplier) {
 	if(resultSum == playerSumsForScoring[PLAYER_1]) {
-		playersScore[PLAYER_1]++;
+		playersScore[PLAYER_1] += BOARD3D_BASE_SCORE_POINT * scoreMultiplier;
 	} else if(resultSum == playerSumsForScoring[PLAYER_2]) {
-		playersScore[PLAYER_2]++;
+		playersScore[PLAYER_2] += BOARD3D_BASE_SCORE_POINT * scoreMultiplier;
 	}
 }
 static PlayerIds DefineWinningPlayer(int* playersScore) {

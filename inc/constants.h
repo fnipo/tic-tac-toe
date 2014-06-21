@@ -27,6 +27,8 @@
 #define GAMEMENU_MIN_OPTION					0
 #define GAMEMENU_MAX_OPTION					2
 #define BACK_OPTION							0
+#define BOARD3D_PLAYER_MOVE_MIN_OPTION		1
+#define BOARD3D_PLAYER_MOVE_MAX_OPTION		3
 
 typedef int bool_t;
 typedef enum { FALSE, TRUE };
@@ -54,6 +56,7 @@ typedef enum GameModeMenuOption {
 } GameModeMenuOption;
 
 typedef struct PlayerInfo {
+    PlayerIds playerId;
 	char name[PLAYER_NAME_SIZE];
 	GameMode mode;
 	int score;
