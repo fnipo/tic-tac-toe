@@ -18,7 +18,7 @@
 
 1403383879 c:\users\fnf\workspace\tictactoe\inc\ui_general.h
 
-1403385787 source:c:\users\fnf\workspace\tictactoe\src\score.c
+1403563565 source:c:\users\fnf\workspace\tictactoe\src\score.c
 	<score.h>
 	<stdio.h>
 	<string.h>
@@ -30,7 +30,7 @@
 
 1403383182 c:\users\fnf\workspace\tictactoe\inc\strings.h
 
-1403299025 source:c:\users\fnf\workspace\tictactoe\src\ui_board3d.c
+1403385873 source:c:\users\fnf\workspace\tictactoe\src\ui_board3d.c
 	<ui_board3d.h>
 	<constants.h>
 	<board3d.h>
@@ -39,7 +39,7 @@
 
 1403126736 c:\users\fnf\workspace\tictactoe\inc\ui_board3d.h
 
-1403383896 source:c:\users\fnf\workspace\tictactoe\src\ui_general.c
+1403563517 source:c:\users\fnf\workspace\tictactoe\src\ui_general.c
 	<ui_general.h>
 	<stdio.h>
 	<stdlib.h>
@@ -48,6 +48,7 @@
 	<util.h>
 	<ui_board3d.h>
 	<score.h>
+	<heitor.h>
 
 1402946981 c:\users\fnf\workspace\tictactoe\inc\util.h
 
@@ -56,4 +57,11 @@
 	<constants.h>
 	<stdio.h>
 	<stdlib.h>
+
+1403413496 source:c:\users\fnf\workspace\tictactoe\src\heitor.c
+	<stdio.h>
+	<string.h>
+	<constants.h>
+
+1403305272 c:\users\fnf\workspace\tictactoe\inc\heitor.h
 

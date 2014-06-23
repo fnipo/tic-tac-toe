@@ -13,6 +13,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c99" />
+					<Add directory="inc" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -22,7 +24,36 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="inc/board3d.h" />
+		<Unit filename="inc/constants.h" />
+		<Unit filename="inc/heitor.h" />
+		<Unit filename="inc/score.h" />
+		<Unit filename="inc/strings.h" />
+		<Unit filename="inc/ui_board3d.h" />
+		<Unit filename="inc/ui_general.h" />
+		<Unit filename="inc/util.h" />
+		<Unit filename="src/board3d.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/constants.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/heitor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/score.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/ui_board3d.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/ui_general.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/util.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
